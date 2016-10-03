@@ -92,6 +92,7 @@ function setSideMenu() {
 
 //var imageUrl="http://localhost/paintee-admin";
 var imageUrl=window.location.protocol+"//paintee.me/paintee-admin";
+//var imageUrl="https//paintee.me/paintee-admin";
 var apiUrl = imageUrl + "/api";
 
 //console.log(navigator.userAgent);
