@@ -245,6 +245,7 @@ public class FileInfoGenerator {
 
 		File originalFile = null;
 		File cropImageFile = null;
+		File cropImageFilePre = null;
 		File thumbnailFile1 = null;
 		File thumbnailFile2 = null;
 
@@ -266,8 +267,9 @@ public class FileInfoGenerator {
 			cropImageFilePre = new File(fullPath.toString());
             cropImageFile = new File(fullPath.toString());
 			
+            // 2016-10-04 : 가로/세로 Problem
 			//imgScalrWrapper.cropCenter(originalFile, cropImageFile, "jpeg", 1080, 1500);
-			imgScalrWrapper.cropCustom(originalFile, cropImageFilePre, "jpeg", paintingCreateVO.getX(), paintingCreateVO.getY(), paintingCreateVO.getWidth(), paintingCreateVO.getHeight());
+			imgScalrWrapper.cropCustom(originalFile, cropImageFile, "jpeg", paintingCreateVO.getX(), paintingCreateVO.getY(), paintingCreateVO.getxWidth(), paintingCreateVO.getyWidth(), paintingCreateVO.getRotate());
             imgScalrWrapper.resize(cropImageFilePre, cropImageFile, "jpeg", 1080, 1500);
 
 			fileInfo.setSize(cropImageFile.length());

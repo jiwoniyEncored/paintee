@@ -140,7 +140,8 @@ public class ImgScalrWrapper {
 			writeImage(doneImage, resultFile, imageWritersByFormatName, 1);
 		}
 	}
-    public void cropCustom(File sourceFile, File resultFile, String imageWritersByFormatName, int x, int y, int width, int height) throws IOException {
+	
+    public void cropCustom(File sourceFile, File resultFile, String imageWritersByFormatName, int x, int y, int width, int height, int rotate) throws IOException {
 		BufferedImage bufferedImage = ImageIO.read(sourceFile);
 
 		int count = 0;
@@ -152,7 +153,19 @@ public class ImgScalrWrapper {
 		}
 
 		if(count > 0) {
-			BufferedImage doneImage = Scalr.crop(bufferedImage, x, y, width, height, Scalr.OP_ANTIALIAS);
+			
+			// 2016-10-04 : 가로/세로 Problem
+			BufferedImage doneImage;
+			
+			if(rotate == 90){
+//				bufferedImage = ;
+				doneImage = Scalr.crop(Scalr.rotate(bufferedImage, Scalr.Rotation.CW_90, Scalr.OP_ANTIALIAS), x, y, width, height, Scalr.OP_ANTIALIAS);
+			}else{
+				
+				doneImage = Scalr.crop(bufferedImage, x, y, width, height, Scalr.OP_ANTIALIAS);
+			}
+			
+//			BufferedImage doneImage = Scalr.crop(bufferedImage, x, y, width, height, Scalr.OP_ANTIALIAS);
 
 			writeImage(doneImage, resultFile, imageWritersByFormatName, 1);
 		}
